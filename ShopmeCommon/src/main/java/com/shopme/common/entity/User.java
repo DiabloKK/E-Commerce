@@ -121,4 +121,12 @@ public class User {
                 ", roles=" + roles +
                 '}';
     }
+
+    @Transient
+    public String getPhotosImagePath() {
+        if(id == null || photos == null) return "/images/default-user.png";
+
+        return "/ShopmeWebParent/ShopmeBackEnd/user-photos/" + this.id + "/" + this.photos;
+    }
+
 }
