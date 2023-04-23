@@ -30,5 +30,19 @@
     <span th:if="${sortField == fieldName}"
           th:class="${sortDir == 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}"></span>
 </th>
+
+<div th:fragment="category_status">
+    <a class="fas fa-circle fa-2x icon-dark"
+       th:href="@{'/users/enabled/true'}" title="Enable this user"></a>
+</div>
+
+<div th:fragment="category_actions">
+    <a class="fas fa-edit fa-2x icon-green" th:href="@{'/categories/edit/'}"
+       title="Edit this user"></a>
+    &nbsp;
+    <a class="fas fa-trash fa-2x icon-dark link-delete" th:href="@{'/categories/delete/'}"
+       title="Delete this user"></a>
+</div>
+
 </body>
 </html>
