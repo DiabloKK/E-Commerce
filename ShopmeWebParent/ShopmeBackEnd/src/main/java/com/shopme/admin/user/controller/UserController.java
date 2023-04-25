@@ -131,6 +131,10 @@ public class UserController {
     public String deleteUser(@PathVariable(name = "id") Integer id, Model model, RedirectAttributes redirectAttributes) {
         try {
             service.delete(id);
+
+            String categoryDir = "ShopmeWebParent/ShopmeBackEnd/user-photos/" + id;
+            FileUploadUtil.removeDir(categoryDir);
+
             redirectAttributes.addFlashAttribute("message", "The user ID " + id + " has been deleted successfully");
         } catch (UserNotFoundException ex) {
             redirectAttributes.addFlashAttribute("message", ex.getMessage());

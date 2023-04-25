@@ -16,7 +16,7 @@ public class Category {
     private String name;
     @Column(length = 64, nullable = false, unique = true)
     private String alias;
-    @Column(length = 128, nullable = false)
+    @Column(length = 128)
     private String image;
     private boolean enabled;
     @ManyToOne
@@ -56,6 +56,7 @@ public class Category {
         copyCategory.setImage(category.getImage());
         copyCategory.setAlias(category.getAlias());
         copyCategory.setEnabled(category.isEnabled());
+        copyCategory.setHasChildren(category.getChildren().size() > 0);
 
         return copyCategory;
     }
@@ -143,9 +144,19 @@ public class Category {
 
     @Transient
     public String getImagePath() {
-        if(this.id == null) return "/images/image-thumbnail.png";
+        if(this.id == null || image == null) return "/images/image-thumbnail.png";
 
         return "/ShopmeWebParent/ShopmeBackEnd/category-images/" + this.id + "/" + this.image;
     }
 
+    @Transient
+    private boolean hasChildren;
+
+    public boolean isHasChildren() {
+        return hasChildren;
+    }
+
+    public void setHasChildren(boolean hasChildren) {
+        this.hasChildren = hasChildren;
+    }
 }
